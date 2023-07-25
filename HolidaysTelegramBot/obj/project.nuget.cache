@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "ser+nS+6hth2Ml8aBKuTjzESmJxvJks7XteRRnmoYiD8XUtBtRho3eCoIBoD8A6aU+nsyyQE5L2n2zoYcjXjMg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\efrem\\source\\repos\\HolidaysTelegramBot\\HolidaysTelegramBot\\HolidaysTelegramBot.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\efrem\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\efrem\\.nuget\\packages\\telegram.bot\\19.0.0\\telegram.bot.19.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
