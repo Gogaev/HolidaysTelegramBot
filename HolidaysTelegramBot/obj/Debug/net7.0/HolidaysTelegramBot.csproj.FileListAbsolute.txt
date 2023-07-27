@@ -16,3 +16,14 @@ C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\obj\Debug\ne
 C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\obj\Debug\net7.0\HolidaysTelegramBot.pdb
 C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\obj\Debug\net7.0\HolidaysTelegramBot.genruntimeconfig.cache
 C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\obj\Debug\net7.0\ref\HolidaysTelegramBot.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\bin\Debug\net7.0\Microsoft.Extensions.Configuration.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\bin\Debug\net7.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\bin\Debug\net7.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\bin\Debug\net7.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\bin\Debug\net7.0\Microsoft.Extensions.Http.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\bin\Debug\net7.0\Microsoft.Extensions.Logging.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\bin\Debug\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\bin\Debug\net7.0\Microsoft.Extensions.Primitives.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\HolidaysTelegramBot\bin\Debug\net7.0\OpenAI_API.dll
