@@ -60,54 +60,56 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
         return;
 
     var chatId = message.Chat.Id;
-
     Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
-
-    GetPersonInfo(botClient, message);
-}
-
-async void GetPersonInfo(ITelegramBotClient botClient, Message message)
-{
-    var chatId = message.Chat.Id;
     var currentState = await GetUserCondition(chatId);
-    IChatGPTService chatGPT = new ChatGPTService();
 
     if (currentState == null)
-         CreateUserCondition(chatId, "", message.Text);
-    
-    if(currentState is null || string.IsNullOrEmpty(currentState.LastQuery))
+        CreateUserCondition(chatId, "", message.Text);
+
+    if (currentState is null || string.IsNullOrEmpty(currentState.LastQuery))
     {
         switch (message.Text)
         {
             case gpt:
-                await botClient.SendTextMessageAsync(
-                    chatId: chatId,
+                await botClient.SendTextMessageAsync(chatId: chatId,
                     text: "Write person Name",
-                replyMarkup: buttons);
+                    replyMarkup: buttons,
+                    cancellationToken: cancellationToken);
                 UpdateUserCondition(chatId, "Write person Name", message.Text);
                 break;
             case description:
-                await botClient.SendTextMessageAsync(
-                    chatId: chatId,
-                    text: "Bot will write a list of ideas for presents for birthday to someone. \nYou only have to write a description of this persone.",
-                    replyMarkup: buttons);
+                await botClient.SendTextMessageAsync(chatId: chatId,
+                    text: "Bot will write a list of ideas for presents for birthday to someone. \nYou only have to write a description of this person.",
+                    replyMarkup: buttons,
+                    cancellationToken: cancellationToken);
                 break;
             default:
                 await botClient.SendTextMessageAsync(
                     chatId: chatId,
                     text: "Type smth else",
-                    replyMarkup: buttons);
+                    replyMarkup: buttons,
+                    cancellationToken: cancellationToken);
                 break;
         }
     }
+
     else
     {
-        var result = currentState.Response;
+        GetPersonInfo(botClient, message);
+    }
+}
+
+async void GetPersonInfo(ITelegramBotClient client, Message message)
+{
+    var chatId = message.Chat.Id;
+    var currentState = await GetUserCondition(chatId);
+    IChatGPTService chatGpt = new ChatGPTService();
+    var result = currentState.Response;
         switch (currentState.LastQuery)
         {
             case "Write person Name":
                 result += "Name - " + message.Text;
-                await botClient.SendTextMessageAsync(
+                await client.SendTextMessageAsync(
                     chatId: chatId,
                     text: "Write person Age",
                 replyMarkup: buttons);
@@ -115,7 +117,7 @@ async void GetPersonInfo(ITelegramBotClient botClient, Message message)
                 break;
             case "Write person Age":
                 result += "\nAge - " + message.Text;
-                await botClient.SendTextMessageAsync(
+                await client.SendTextMessageAsync(
                     chatId: chatId,
                     text: "Write person Gender",
                 replyMarkup: buttons);
@@ -123,7 +125,7 @@ async void GetPersonInfo(ITelegramBotClient botClient, Message message)
                 break;
             case "Write person Gender":
                 result += "\nJob/Hobie - " + message.Text;
-                await botClient.SendTextMessageAsync(
+                await client.SendTextMessageAsync(
                     chatId: chatId,
                     text: "Write person Job/Hobie",
                 replyMarkup: buttons);
@@ -131,7 +133,7 @@ async void GetPersonInfo(ITelegramBotClient botClient, Message message)
                 break;
             case "Write person Job/Hobie":
                 result += "\nJob/Hobie - " + message.Text;
-                await botClient.SendTextMessageAsync(
+                await client.SendTextMessageAsync(
                     chatId: chatId,
                     text: "Write person description",
                 replyMarkup: buttons);
@@ -139,22 +141,22 @@ async void GetPersonInfo(ITelegramBotClient botClient, Message message)
                 break;
             case "Write person description":
                 result += "Description " + message.Text;
-                var response = await chatGPT.AskChatGPT(result);
-                await botClient.SendTextMessageAsync(
+                var response = await chatGpt.AskChatGPT(result);
+                await client.SendTextMessageAsync(
                     chatId: chatId,
                     text: response,
                 replyMarkup: buttons);
                 UpdateUserCondition(chatId, null, null);
                 break;
             default:
-                await botClient.SendTextMessageAsync(
+                await client.SendTextMessageAsync(
                     chatId: chatId,
                     text: "Type smth else",
                     replyMarkup: buttons);
                 UpdateUserCondition(chatId, null, null);
                 break;
         }
-    }
+    //}
 }
 
 async Task<UserCondition?> GetUserCondition(long chatId)
@@ -186,6 +188,7 @@ async void UpdateUserCondition(long chatId, string? lastQuery, string? message)
         userCond.LastQuery = lastQuery;
         userCond.Response = message;
     }
+    
     await db.SaveChangesAsync();
 }
 
@@ -197,7 +200,6 @@ Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, 
             => $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
         _ => exception.ToString()
     };
-
     Console.WriteLine(ErrorMessage);
     return Task.CompletedTask;
 }

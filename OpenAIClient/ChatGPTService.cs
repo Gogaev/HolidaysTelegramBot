@@ -5,7 +5,7 @@ namespace OpenAIClient
 {
     public class ChatGPTService : IChatGPTService
     {
-        const string APIKey = "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";
+        const string APIKey = "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";
 
         public async Task<string> AskChatGPT(string query)
         {
