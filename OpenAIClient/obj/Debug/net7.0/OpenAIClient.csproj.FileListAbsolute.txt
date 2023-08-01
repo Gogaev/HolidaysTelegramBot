@@ -1,0 +1,12 @@
+C:\Users\efrem\source\repos\HolidaysTelegramBot\OpenAIClient\bin\Debug\net7.0\OpenAIClient.deps.json
+C:\Users\efrem\source\repos\HolidaysTelegramBot\OpenAIClient\bin\Debug\net7.0\OpenAIClient.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\OpenAIClient\bin\Debug\net7.0\OpenAIClient.pdb
+C:\Users\efrem\source\repos\HolidaysTelegramBot\OpenAIClient\obj\Debug\net7.0\OpenAIClient.csproj.AssemblyReference.cache
+C:\Users\efrem\source\repos\HolidaysTelegramBot\OpenAIClient\obj\Debug\net7.0\OpenAIClient.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\efrem\source\repos\HolidaysTelegramBot\OpenAIClient\obj\Debug\net7.0\OpenAIClient.AssemblyInfoInputs.cache
+C:\Users\efrem\source\repos\HolidaysTelegramBot\OpenAIClient\obj\Debug\net7.0\OpenAIClient.AssemblyInfo.cs
+C:\Users\efrem\source\repos\HolidaysTelegramBot\OpenAIClient\obj\Debug\net7.0\OpenAIClient.csproj.CoreCompileInputs.cache
+C:\Users\efrem\source\repos\HolidaysTelegramBot\OpenAIClient\obj\Debug\net7.0\OpenAIClient.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\OpenAIClient\obj\Debug\net7.0\refint\OpenAIClient.dll
+C:\Users\efrem\source\repos\HolidaysTelegramBot\OpenAIClient\obj\Debug\net7.0\OpenAIClient.pdb
+C:\Users\efrem\source\repos\HolidaysTelegramBot\OpenAIClient\obj\Debug\net7.0\ref\OpenAIClient.dll
