@@ -86,7 +86,7 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
             default:
                 await botClient.SendTextMessageAsync(
                     chatId: chatId,
-                    text: "Type smth else",
+                    text: "Choose command",
                     replyMarkup: buttons,
                     cancellationToken: cancellationToken);
                 break;
