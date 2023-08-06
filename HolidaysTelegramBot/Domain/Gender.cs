@@ -1,6 +1,7 @@
-namespace HolidaysTelegramBot.Models;
+namespace HolidaysTelegramBot.Domain;
 
-public class Gender
+public enum Gender
 {
-    
+    Male = 1,
+    Female
 }

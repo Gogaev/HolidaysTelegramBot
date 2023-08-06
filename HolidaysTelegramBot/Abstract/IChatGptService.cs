@@ -1,7 +1,8 @@
-﻿namespace HolidaysTelegramBot.Abstract
+﻿using HolidaysTelegramBot.Domain;
+
+namespace HolidaysTelegramBot.Abstract;
+
+public interface IChatGptService
 {
-    public interface IChatGPTService
-    {
-        Task<string> AskChatGPT(string query);
-    }
+    Task<string> Ask(UserContext context);
 }

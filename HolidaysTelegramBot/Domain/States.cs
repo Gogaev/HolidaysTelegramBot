@@ -1,6 +1,11 @@
-namespace HolidaysTelegramBot.Models;
+namespace HolidaysTelegramBot.Domain;
 
-public class States
+public enum States
 {
-    
+    Initial = 1,
+    WaitingForNameInput,
+    WaitingForAgeInput,
+    WaitingForGenderInput,
+    WaitingForJobHobieInput,
+    WaitingForDescriptionInput,
 }

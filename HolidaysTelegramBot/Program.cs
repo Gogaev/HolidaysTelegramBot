@@ -1,49 +1,42 @@
-﻿using HolidaysTelegramBot.Abstract;
-using HolidaysTelegramBot.Repository;
-using HolidaysTelegramBot.Repository.IRepository;
+﻿using HolidaysTelegramBot;
+using HolidaysTelegramBot.Abstract;
+using HolidaysTelegramBot.Options;
 using HolidaysTelegramBot.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Telegram.Bot;
 using Telegram.Bot.Services;
 
-IHost host = Host.CreateDefaultBuilder(args)
+// var token = Environment.GetEnvironmentVariable("BotConfiguration__Token");
+
+var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
-        // Register Bot configuration
-        services.Configure<BotConfiguration>(
-            context.Configuration.GetSection(BotConfiguration.Configuration));
+        var configuration = context.Configuration.GetSection("BotConfiguration");
+        services.Configure<BotOptions>(configuration);
 
-        // Register named HttpClient to benefits from IHttpClientFactory
-        // and consume it with ITelegramBotClient typed client.
-        // More read:
-        //  https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-5.0#typed-clients
-        //  https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests
+        var botOptions = new BotOptions();
+        configuration.Bind(botOptions);
+
         services.AddHttpClient("telegram_bot_client")
                 .AddTypedClient<ITelegramBotClient>((httpClient, sp) =>
                 {
-                    BotConfiguration? botConfig = sp.GetConfiguration<BotConfiguration>();
-                    TelegramBotClientOptions options = new(botConfig.BotToken);
+                    TelegramBotClientOptions options = new(botOptions.Token);
                     return new TelegramBotClient(options, httpClient);
                 });
 
+        // "Host=localhost;Port=5432;Database=bot;Username=postgres;Password=password;Integrated Security=false;"
+        var connectionString = context.Configuration["DbConnectionString"];
+        services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseNpgsql(connectionString));
         services.AddScoped<UpdateHandler>();
         services.AddScoped<ReceiverService>();
-        services.AddScoped<IChatGPTService, ChatGPTService>();
-        services.AddScoped<IUserConditionRepository, UserConditionRepository>();
+        services.AddScoped<IChatGptService, ChatGptService>();
         services.AddHostedService<PollingService>();
     })
     .Build();
 
+
 await host.RunAsync();
-
-#pragma warning disable CA1050 // Declare types in namespaces
-#pragma warning disable RCS1110 // Declare type inside namespace.
-public class BotConfiguration
-#pragma warning restore RCS1110 // Declare type inside namespace.
-#pragma warning restore CA1050 // Declare types in namespaces
-{
-    public static readonly string Configuration = "BotConfiguration";
-
-    public string BotToken { get; set; } = "5914114434:AAGJ9mh8Iy92K4IBtoq6awzsZDrIscSOd5g";
-}
