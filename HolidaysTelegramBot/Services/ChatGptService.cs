@@ -11,8 +11,9 @@ public class ChatGptService : IChatGptService
 
     public async Task<string> Ask(UserContext context)
     {
-        var openAI = new OpenAIAPI("");
-        var chat = openAI.Chat.CreateConversation();
+        var key = Environment.GetEnvironmentVariable("OpenAiKey");
+        var openAi = new OpenAIAPI(key);
+        var chat = openAi.Chat.CreateConversation();
         var queryBuilder = new StringBuilder();
         queryBuilder.Append("Name - " + context.Name);
         queryBuilder.Append(" Age - " + context.Age);
